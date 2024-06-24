@@ -4,8 +4,7 @@ import NewPost from "./NewPost";
 import { useState } from "react";
 import Modal from "./Modal";
 
-function PostList() {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+function PostList({ onStopPosting, modalVisibility }) {
   const [textBody, setTextBody] = useState("");
   const [textAuthor, setTextAuthor] = useState("");
 
@@ -17,14 +16,10 @@ function PostList() {
     setTextAuthor(event.target.value);
   };
 
-  const hideModalHandler = () => {
-    setModalIsVisible(false);
-  }
-
   return (
     <>
-      {modalIsVisible && (
-        <Modal handleVisibilityModal={hideModalHandler}>
+      {modalVisibility && (
+        <Modal handleVisibilityModal={onStopPosting}>
           <NewPost 
             bodyHandleChangeEvent={bodyHandleChangeEvent} 
             authorHandleChangeEvent={authorHandleChangeEvent}
